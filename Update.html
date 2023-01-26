@@ -1,0 +1,104 @@
+
+<html lang="en">
+<head>
+<title>Student web page</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script
+src="https://login2explore.com/jpdb/resources/js/0.0.4/jpdb-commons.js"></script>
+<style type="text/css">
+  
+.ll{
+margin-top:180px;
+}
+.tx{
+text-align:center;
+width:250px;
+height:40px;
+border-radius:20px 20px 20px 20px;
+}
+.tx:hover{
+height:50px;
+}
+#log{
+text-align:right;
+}
+#log ul li{
+display:inline-block;
+padding:12px;
+font-size:18px;
+}
+.b{
+text-align:center;
+width:420px;
+height:30px;
+border-radius:20px 20px 20px 20px;
+}
+.b:hover{
+color:white;
+}
+</style>
+</head>
+<body>
+<div id=log>
+<ul>
+
+<li><a href="index.html">INSERT</a></li>
+<li><a href="search.html">SEARCH</a></li>
+<li><a href="Update.html">UPDATE</a></li>
+<li><a href="delete.html">DELETE</a></li>
+
+</ul>
+</div>
+<center>
+<div class="ll">
+<form id="Form" method="post">
+<table >
+
+<caption><h1>Update details </h1></caption>
+<tr>
+<p>Only name can be updated.</p>
+</tr>
+<tr>
+<th><h3>Enter Enrollmentno. </th>
+<td><input type="number" class="tx" placeholder="Roll no." name="tn" id="tn" ></td>
+</tr>
+<tr>
+<th><h3>Enter Name. </th>
+<td><input type="text" class="tx" placeholder="Name" name="tn2"  id="tn2"></td>
+</tr>
+
+<tr>
+<td colspan="2"><input type="button" value="update" class="b" onclick="update();"></td>
+</tr>
+</table>
+</form>
+</div>
+</center>
+ <script>
+   function update(){
+           
+            var roll = parseInt(document.getElementById("tn").value);
+            var Name = document.getElementById("tn2").value;
+            
+            var jsonObj = {
+                Name : Name
+            };
+            var reqString = createUPDATERecordRequest("90932297|-31949270981019048|90954142", JSON.stringify(jsonObj), "Marks", "Marks-Rel", roll);
+            alert(reqString);
+            jQuery.ajaxSetup({async: false});
+            var resultObj =executeCommandAtGivenBaseUrl(reqString,"http://api.login2explore.com:5577", "/api/iml");
+            jQuery.ajaxSetup({async: true});
+            alert(JSON.stringify(resultObj));
+            
+        }
+    
+    </script>
+</body>
+</html>
