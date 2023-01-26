@@ -1,0 +1,118 @@
+
+<html lang="en">
+<head>
+<title>Student web page</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script
+src="https://login2explore.com/jpdb/resources/js/0.0.4/jpdb-commons.js"></script>
+<style type="text/css">
+  
+.ll{
+margin-top:180px;
+}
+.tx{
+text-align:center;
+width:250px;
+height:40px;
+border-radius:20px 20px 20px 20px;
+}
+.tx:hover{
+height:50px;
+}
+#log{
+text-align:right;
+}
+#log ul li{
+display:inline-block;
+padding:12px;
+font-size:18px;
+}
+.b{
+text-align:center;
+width:420px;
+height:30px;
+border-radius:20px 20px 20px 20px;
+}
+.b:hover{
+color:white;
+}
+</style>
+</head>
+<body>
+<div id=log>
+<ul>
+
+<li><a href="index.html">INSERT</a></li>
+<li><a href="search.html">SEARCH</a></li>
+<li><a href="Update.html">UPDATE</a></li>
+<li><a href="delete.html">DELETE</a></li>
+
+</ul>
+</div>
+<center>
+<div class="ll">
+<form id="Form" method="post">
+<table >
+<caption><h1>Delete student details</h1></caption>
+<tr>
+<th><h3>Enter Enrollmentno. </th>
+<td><input type="number" class="tx" placeholder="Roll no." name="Id" id="Id"></td>
+</tr>
+
+
+<tr>
+<td colspan="2"><input type="button"  class="b" value="delete" onclick="Delete();"></td>
+</table>
+</form>
+</div>
+</center>
+ <script>
+       
+//$("#Id").focus();
+//function validateAndGetFormData() {
+//var enrollVar = $("#Id").val();
+//if (enrollVar === "") {
+//alert("Enrollment Number is Required Value");
+//$("#Id").focus();
+//return "";
+//}
+//
+//var jsonStrObj = {
+//Id: enrollVar
+//
+//};
+//
+//return JSON.stringify(jsonStrObj);
+//}
+//
+//function resetForm() {
+//$("#Id").val("");
+//alert("data deleted");
+//}
+
+function Delete() {
+// var jsonStr=validateAndGetFormData();
+var roll = parseInt(document.getElementById("Id").value);
+//if (jsonStr === "") {
+//return ;
+//}
+//var putReqStr = createREMOVERecordRequest("90932297|-31949270981019048|90954142",jsonStr, "Marks", "Marks-Rel");
+var putReqStr = createREMOVERecordRequest("90932297|-31949270981019048|90954142", "Marks", "Marks-Rel",roll);
+alert(putReqStr);
+jQuery.ajaxSetup({async: false});
+var resultObj = executeCommandAtGivenBaseUrl(putReqStr,"http://api.login2explore.com:5577", "/api/iml");
+alert(JSON.stringify(resultObj));
+jQuery.ajaxSetup({async: true});
+resetForm();
+}
+
+    </script>
+</body>
+</html>
